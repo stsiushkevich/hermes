@@ -1,0 +1,47 @@
+.loader {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &__icon {
+    height: 30px;
+  }
+
+  &_has_backdrop {
+    padding: 0;
+  }
+
+  &_centered {
+    position: absolute;
+    top: calc(50% - 25px);
+    left: calc(50% - 35px);
+  }
+
+  &__backdrop {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.2;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.loader_has_backdrop {
+  .loader__icon {
+    top: calc(50% - 15px);
+    left: calc(50% - 25px);
+    z-index: 2;
+    position: absolute;
+  }
+}
+
+.inline {
+  display: inline-flex;
+}

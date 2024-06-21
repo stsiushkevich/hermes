@@ -1,0 +1,11 @@
+.textField {
+    position: relative;
+    padding-bottom: 20px;
+
+    &__errorText {
+        left: 0;
+        bottom: 0;
+        position: absolute;
+        color: #d40000;
+    }
+}
