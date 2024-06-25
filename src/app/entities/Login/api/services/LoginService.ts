@@ -10,11 +10,11 @@ const BASE_PATH = '/login';
 const LOGOUT_PATH = '/logout';
 
 export class LoginService extends BaseService<unknown> {
-  login<R>(data: Credentials): Promise<R> {
+  login<R>(data: Credentials): Promise<R | IError> {
     return super.post(data, { path: BASE_PATH });
   }
 
-  logout<R>(data: Credentials): Promise<R> {
+  logout<R>(data: Credentials): Promise<R | IError> {
     return super.post(data, { path: LOGOUT_PATH });
   }
 }

@@ -13,6 +13,7 @@ export const User = [
         "notifications": null,
         "email": "dweber@gmail.com",
         "login": "denweber",
+        "password": "1111"
     },
     {
         id: 1108,
@@ -30,6 +31,7 @@ export const User = [
         "notifications": null,
         "email": "eiglesias@gmail.com",
         "login": "eniglesias",
+        "password": "2222"
     },
     {
         id: 1109,
@@ -47,6 +49,7 @@ export const User = [
         "notifications": null,
         "email": "mzukerberg@gmail.com",
         "login": "markzukerberg",
+        "password": "3333"
     },
     {
         id: 1110,
@@ -64,6 +67,7 @@ export const User = [
         "notifications": null,
         "email": "eferrari@gmail.com",
         "login": "ensoferrari",
+        "password": "4444"
     },
 ]
 

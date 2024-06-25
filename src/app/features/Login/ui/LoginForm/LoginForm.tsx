@@ -3,24 +3,31 @@
 import {
     FC,
     memo,
+    useRef,
     useState,
-    useEffect
+    useEffect,
+    FormEventHandler
 } from 'react'
 
 import cn from 'classnames'
 
+import { useRouter } from 'next/navigation'
+
 import {
     Row,
-    Col,
-    Form,
-    Button,
-    FloatingLabel
-} from 'react-bootstrap'
+    Col
+} from 'react-grid-system'
+
+import {
+    Toast
+} from 'primereact/toast'
+
+import { Button } from 'primereact/button'
+import { FloatLabel } from 'primereact/floatlabel'
 
 import { IError } from '@shared/types'
 
 import {
-    Toast,
     Loader
 } from '@shared/ui'
 
@@ -39,11 +46,6 @@ import { CredentialsValidator } from '../../model/validation/validators'
 
 import styles from './LoginForm.module.scss'
 
-type Props = {
-    onSubmitSuccess?: () => {},
-    onSubmitFailure?: (e: IError) => {}
-}
-
 enum FieldNames {
     USER_NAME = 'username',
     PASSWORD = 'password',
@@ -56,11 +58,14 @@ const entity: Credentials = {
 
 const validator = new CredentialsValidator()
 
-const LoginForm: FC<Props> = ({ onSubmitSuccess, onSubmitFailure }) => {
+const LoginForm: FC = () => {
     const [needValidation, setNeedValidation] = useState(false);
-    const [isErrorToastVisible, toggleErrorToast] = useState(false);
+
+    const toastRef = useRef<Toast>(null)
 
     const [_, setAuthUser] = useAuthUser()
+
+    const router = useRouter()
 
     const {
         data,
@@ -76,8 +81,17 @@ const LoginForm: FC<Props> = ({ onSubmitSuccess, onSubmitFailure }) => {
         mutateAsync: submit
     } = useCredentialsSubmit()
 
-    function closeErrorToast() {
-        toggleErrorToast(false)
+    function showErrorToast() {
+        toastRef.current.show({
+            severity: 'error',
+            summary: 'Login Error',
+            detail: error.message,
+            life: 3000
+        });
+    }
+
+    function navigateToHome() {
+        void router.replace('/home')
     }
 
     function validateIf() {
@@ -88,15 +102,17 @@ const LoginForm: FC<Props> = ({ onSubmitSuccess, onSubmitFailure }) => {
         }
     }
 
-    function tryToSubmit() {
+    const tryToSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
         void validate().then(async () => {
             try {
                 await submit(data);
-                onSubmitSuccess();
                 setNeedValidation(false);
+                navigateToHome()
             } catch (e) {
-                toggleErrorToast(true)
-                onSubmitFailure(e as IError);
+                showErrorToast()
             }
 
             return null;
@@ -114,45 +130,41 @@ const LoginForm: FC<Props> = ({ onSubmitSuccess, onSubmitFailure }) => {
     useEffect(validateIf, [validate, needValidation]);
 
     return (
-        <Form className={cn("container", styles.loginForm)} onSubmit={tryToSubmit}>
-            {isPending && (
-                <Loader hasBackdrop/>
-            )}
-
+        <form className={cn("container", styles.loginForm)} onSubmit={tryToSubmit}>
             <Row>
                 <Col>
-                    <div className={styles.loginForm__title}>
-                        Log In
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <FloatingLabel label="Login">
+                    <FloatLabel>
                         <TextField
+                            id={FieldNames.USER_NAME}
                             name={FieldNames.USER_NAME}
                             value={data[FieldNames.USER_NAME]}
                             errorText={errors[FieldNames.USER_NAME] as string}
                             onChange={changeField}
                         />
-                    </FloatingLabel>
+                        <label htmlFor={FieldNames.USER_NAME}>Login</label>
+                    </FloatLabel>
                 </Col>
             </Row>
 
             <Row>
                 <Col>
-                    <FloatingLabel label="Password">
+                    <FloatLabel>
                         <TextField
+                            id={FieldNames.PASSWORD}
                             name={FieldNames.PASSWORD}
                             value={data[FieldNames.PASSWORD]}
                             errorText={errors[FieldNames.PASSWORD] as string}
                             onChange={changeField}
                         />
-                    </FloatingLabel>
+                        <label htmlFor={FieldNames.PASSWORD}>Password</label>
+                    </FloatLabel>
                 </Col>
             </Row>
 
             <Row>
+                <Col className="flex flex-row justify-content-end align-items-center">
+                    {isPending && (<Loader size={30}/>)}
+                </Col>
                 <Col className={styles.loginForm__actions}>
                     <Button type="submit">
                         Login
@@ -160,17 +172,8 @@ const LoginForm: FC<Props> = ({ onSubmitSuccess, onSubmitFailure }) => {
                 </Col>
             </Row>
 
-            {isErrorToastVisible && (
-                <Toast
-                    isVisible={false}
-                    variant="error"
-                    title="Login Error"
-                    onClose={closeErrorToast}
-                >
-                    {error.message}
-                </Toast>
-            )}
-        </Form>
+            <Toast ref={toastRef}>{error?.message}</Toast>
+        </form>
     )
 }
 

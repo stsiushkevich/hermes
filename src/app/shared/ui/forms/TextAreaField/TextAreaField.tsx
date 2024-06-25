@@ -5,32 +5,30 @@ import React, {
 } from 'react'
 
 import {
-    Form
-} from 'react-bootstrap';
-
-import {
-    FormControlProps
-} from 'react-bootstrap/FormControl';
+    InputTextarea,
+    InputTextareaProps
+} from 'primereact/inputtextarea';
 
 import { FormControl } from '../../../types'
 
-type Props = FormControl & {
+import styles from './TextAreaField.module.scss'
+
+type TextAreaProps = FormControl & {
+    value: string
     rows?: number
+    cols?: number
 }
 
-const TextAreaField: FC<Props> = memo(function TextAreaField(
+const TextAreaField: FC<TextAreaProps> = memo(function TextAreaField(
     {
+        id,
         name,
-        type,
-        size,
         rows,
+        cols,
         value,
-        htmlSize,
-        plaintext,
+        errorText,
         placeholder,
 
-        isValid,
-        isInvalid,
         isReadOnly,
         isDisabled,
 
@@ -38,24 +36,29 @@ const TextAreaField: FC<Props> = memo(function TextAreaField(
     }
 ) {
 
-    const _onChange = useCallback<FormControlProps['onChange']>((e) => {
+    const _onChange = useCallback<InputTextareaProps['onChange']>((e) => {
         onChange(name, e.target.value)
     }, [name, onChange])
 
     return (
-        <Form.Control
-            as="textarea"
-            size={size}
-            value={value}
-            htmlSize={htmlSize}
-            plaintext={plaintext}
-            isValid={isValid}
-            isInvalid={isInvalid}
-            readOnly={isReadOnly}
-            disabled={isDisabled}
-            placeholder={placeholder}
-            onChange={_onChange}
-        />
+        <div className={styles.textAreaField}>
+            <InputTextarea
+                id={id}
+                value={value}
+                rows={rows}
+                cols={cols}
+                readOnly={isReadOnly}
+                disabled={isDisabled}
+                placeholder={placeholder}
+                onChange={_onChange}
+            />
+
+            {errorText && (
+                <div className={styles.textAreaField__errorText}>
+                    {errorText}
+                </div>
+            )}
+        </div>
     )
 })
 

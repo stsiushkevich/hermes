@@ -59,12 +59,22 @@ function onSuccess<D>(o: Response<D>): Promise<D> {
     throw new ServerError(code, message)
 }
 
+function onFailure<D>(e: Response<D> | IError): Promise<D> {
+    const error = (e as IError)
+    const response = (e as Response<D>)
+
+    if (error.code) throw e
+
+    const { code, message } = response.body?.error
+    throw new ServerError(code, message)
+}
+
 export default class BaseService<E = unknown> implements IBaseService<E> {
-    request<D>(request: Request): Promise<D> {
-      return server.service(request) as Promise<D>
+    request<D>(request: Request): Promise<D | IError> {
+      return server.service(request) as Promise<D | IError>
     }
 
-    find(options: BaseOptions): Promise<E[] | Page<E[]>> {
+    find(options: BaseOptions): Promise<E[] | Page<E[]> | IError> {
         const {
             url,
             path,
@@ -74,10 +84,11 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         //return axios.get<E[]>(url ?? getUrl(path, params)).then(onSuccess);
         return this
             .request({ url: url ?? getUrl(path, params), method: 'GET', params })
-            .then((o: Response<E[] | Page<E[]>>) => onSuccess(o));
+            .then((o: Response<E[] | Page<E[]>>) => onSuccess(o))
+            .catch((e: Response<IError>) => onFailure(e))
     }
 
-    findOne(options: BaseOptions): Promise<E> {
+    findOne(options: BaseOptions): Promise<E | IError> {
         const {
             url,
             path,
@@ -88,22 +99,23 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         return this
             .request({ url: url ?? getUrl(path, params), method: 'GET', params })
             .then((o: Response<E>) => onSuccess(o))
+            .catch((e: Response<IError>) => onFailure(e))
     }
 
-    post<R>(entity: E | FormData, options: BaseOptions): Promise<R> {
+    post<R>(entity: E | FormData, options: BaseOptions): Promise<R | IError> {
         const {
             url,
             path,
-            params,
         } = options;
 
         //return axios.post(url ?? getUrl(path, params), entity);
         return this
-            .request({ url: url ?? getUrl(path, params), method: 'POST', body: entity })
-            .then((o: Response<R>) => onSuccess(o));
+            .request({ url: url ?? path, method: 'POST', body: entity })
+            .then((o: Response<R>) => onSuccess(o))
+            .catch((e: Response<IError>) => onFailure(e))
     }
 
-    put<R>(entity: E | FormData, options: BaseOptions): Promise<R> {
+    put<R>(entity: E | FormData, options: BaseOptions): Promise<R | IError> {
         const {
             url,
             path,
@@ -113,10 +125,11 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         //return axios.put(url ?? getUrl(path, params), entity).then(onSuccess);
         return this
             .request({ url: url ?? getUrl(path, params), method: 'PUT', body: entity })
-            .then((o: Response<R>) => onSuccess(o));
+            .then((o: Response<R>) => onSuccess(o))
+            .catch((e: Response<IError>) => onFailure(e))
     }
 
-    delete<R>(options: BaseOptions): Promise<R> {
+    delete<R>(options: BaseOptions): Promise<R | IError> {
         const {
             url,
             path,
@@ -126,6 +139,7 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         //return axios.delete(url ?? getUrl(path, params)).then(onSuccess);
         return this
             .request({ url: url ?? getUrl(path, params), method: 'DELETE', params })
-            .then((o: Response<R>) => onSuccess(o));
+            .then((o: Response<R>) => onSuccess(o))
+            .catch((e: Response<IError>) => onFailure(e))
     }
 }

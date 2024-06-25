@@ -1,5 +1,8 @@
 .loginForm {
-    &__title {}
+    &__title {
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
 
     &__actions {
         display: flex;

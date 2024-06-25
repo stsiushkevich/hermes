@@ -24,7 +24,7 @@ const Loader: FC<Props> = ({ size, isInline, isCentered, hasBackdrop }) => (
     >
         <img
             alt="loading..."
-            src={loader}
+            src={loader.src}
             style={{ height: size }}
             className={styles.loader__icon}
         />

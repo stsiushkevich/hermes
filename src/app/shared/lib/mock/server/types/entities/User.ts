@@ -8,6 +8,7 @@ type User = {
     readonly systemRoleTitle?: string
     readonly login?: string
     readonly email?: string
+    readonly password?: string
     readonly address?: string
     readonly genderId?: number
     readonly genderTitle?: string

@@ -10,9 +10,12 @@ import {
 import service from '../services/LoginService';
 
 function submit(data: Credentials) {
-    return service.login<User>(data);
+    return service.login<User>(data).catch(e => {
+        console.log(e)
+        throw e
+    });
 }
 
 export default function useCredentialsSubmit() {
-    return useMutation<User, IError, Credentials, unknown>({ mutationFn: submit });
+    return useMutation<User | IError, IError, Credentials, unknown>({ mutationFn: submit });
 }

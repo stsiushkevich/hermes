@@ -1,8 +1,10 @@
 import UrlPattern from 'url-pattern'
 
 import { Request } from '../types'
+import { ERRORS } from '../lib/Constants'
 
-type Handler = () => {}
+import ResponseUtils from "@shared/lib/mock/server/lib/utils/ResponseUtils";
+
 
 export default class Controller {
     getPath() { return '' }
@@ -10,7 +12,7 @@ export default class Controller {
     getHandlers() { return [] }
 
     handle(request: Request) {
-        const { url, params } = request
+        const { url, params, body } = request
         const handlers = this.getHandlers()
 
         for (let i = 0; i < handlers.length; i++) {
@@ -19,9 +21,10 @@ export default class Controller {
             const pattern = new UrlPattern(this.getPath() + path)
             const vars = pattern.match(url)
 
-            if (vars) return handler(vars, params)
+            if (vars) return handler(vars, params ?? body)
         }
 
-        return null;
+        const e = ERRORS.NOT_FOUND
+        return ResponseUtils.failure(e.code, e.message, e.statusCode);
     }
 }

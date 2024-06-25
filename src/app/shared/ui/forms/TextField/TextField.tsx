@@ -7,30 +7,28 @@ import React, {
 import cn from 'classnames'
 
 import {
-    Form
-} from 'react-bootstrap';
-
-import {
-    FormControlProps
-} from 'react-bootstrap/FormControl';
+    InputText,
+    InputTextProps
+} from 'primereact/inputtext';
 
 import { FormControl } from '../../../types'
 
 import styles from './TextField.module.scss'
 
-const TextField: FC<FormControl> = memo(function TextField(
+type TextFieldProps = FormControl & {
+    value: string
+}
+
+const TextField: FC<TextFieldProps> = memo(function TextField(
     {
+        id,
         name,
         type,
-        size,
         value,
-        htmlSize,
         errorText,
-        plaintext,
+
         placeholder,
 
-        isValid,
-        isInvalid,
         isReadOnly,
         isDisabled,
 
@@ -38,20 +36,16 @@ const TextField: FC<FormControl> = memo(function TextField(
     }
 ) {
 
-    const _onChange = useCallback<FormControlProps['onChange']>((e) => {
+    const _onChange = useCallback<InputTextProps['onChange']>((e) => {
         onChange(name, e.target.value)
     }, [name, onChange])
 
     return (
         <div className={cn(styles.textField)}>
-            <Form.Control
+            <InputText
+                id={id}
                 type={type}
-                size={size}
                 value={value}
-                htmlSize={htmlSize}
-                plaintext={plaintext}
-                isValid={isValid}
-                isInvalid={isInvalid}
                 readOnly={isReadOnly}
                 disabled={isDisabled}
                 placeholder={placeholder}

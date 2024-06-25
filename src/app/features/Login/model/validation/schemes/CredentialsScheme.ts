@@ -1,10 +1,8 @@
-import yup from 'yup';
+import * as yup from 'yup';
 
-const { object, string } = yup;
-
-const CredentialsScheme = object({
-  username: string().nullable().required(),
-  password: string().nullable().required(),
+const CredentialsScheme = yup.object({
+  username: yup.string().nullable().required(),
+  password: yup.string().nullable().required(),
 });
 
 export default CredentialsScheme;

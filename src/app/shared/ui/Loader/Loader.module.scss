@@ -1,11 +1,10 @@
 .loader {
-  padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
 
   &__icon {
-    height: 30px;
+    height: 40px;
   }
 
   &_has_backdrop {
@@ -37,7 +36,7 @@
   .loader__icon {
     top: calc(50% - 15px);
     left: calc(50% - 25px);
-    z-index: 2;
+    z-index: 100;
     position: absolute;
   }
 }

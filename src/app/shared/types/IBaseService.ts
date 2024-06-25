@@ -1,6 +1,7 @@
 import Page from './Page';
 import Primitive from './Primitive';
 import QueryParams from './QueryParams';
+import { IError } from "@shared/types/index";
 
 export type BaseOptions = {
   url?: string,
@@ -11,9 +12,9 @@ export type BaseOptions = {
 };
 
 export default interface IBaseService<E = unknown> {
-  find: (options: BaseOptions) => Promise<E[] | Page<E[]>>
-  findOne: (options: BaseOptions) => Promise<E>
-  post: <R>(entity: E | FormData, options: BaseOptions) => Promise<R>
-  put: <R>(entity: E | FormData, options: BaseOptions) => Promise<R>
-  delete: <R>(options: BaseOptions) => Promise<R>
+  find: (options: BaseOptions) => Promise<E[] | Page<E[]> | IError>
+  findOne: (options: BaseOptions) => Promise<E | IError>
+  post: <R>(entity: E | FormData, options: BaseOptions) => Promise<R | IError>
+  put: <R>(entity: E | FormData, options: BaseOptions) => Promise<R | IError>
+  delete: <R>(options: BaseOptions) => Promise<R | IError>
 }
