@@ -29,7 +29,7 @@ type Request = {
 
 function getUrl(path: string, params?: QueryParams): string {
     const s = path.charAt(0) === '/' ? '' : '/';
-    const url = `${BACKEND_SERVER_URL}${s}${path}`;
+    const url = `${BACKEND_SERVER_URL ? `/${BACKEND_SERVER_URL}` : ''}${s}${path}`;
 
     if (!params) return url;
 

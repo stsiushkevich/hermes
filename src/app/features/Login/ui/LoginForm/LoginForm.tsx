@@ -25,8 +25,6 @@ import {
 import { Button } from 'primereact/button'
 import { FloatLabel } from 'primereact/floatlabel'
 
-import { IError } from '@shared/types'
-
 import {
     Loader
 } from '@shared/ui'
@@ -90,8 +88,8 @@ const LoginForm: FC = () => {
         });
     }
 
-    function navigateToHome() {
-        void router.replace('/home')
+    function navigateToClients() {
+        void router.replace('/clients')
     }
 
     function validateIf() {
@@ -110,7 +108,7 @@ const LoginForm: FC = () => {
             try {
                 await submit(data);
                 setNeedValidation(false);
-                navigateToHome()
+                navigateToClients()
             } catch (e) {
                 showErrorToast()
             }

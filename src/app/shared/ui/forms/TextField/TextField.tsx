@@ -16,7 +16,7 @@ import { FormControl } from '../../../types'
 import styles from './TextField.module.scss'
 
 type TextFieldProps = FormControl & {
-    value: string
+    value?: string
 }
 
 const TextField: FC<TextFieldProps> = memo(function TextField(

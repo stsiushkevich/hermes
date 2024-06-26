@@ -1,0 +1,13 @@
+.navigationBar {
+    &__logo {
+        top: -4px;
+        height: 45px;
+        position: absolute;
+
+        &Container {
+            height: 35px;
+            width: 150px;
+            position: relative;
+        }
+    }
+}

@@ -198,6 +198,15 @@ export const EmployeeStatus = [
     { "name": "INACTIVE", "title": "Inactive", "id": 4 }
 ]
 
+export const ClientStatus = [
+    { "name": "ACTIVE", "title": "Active", "id": 0 },
+    { "name": "PENDING", "title": "Pending", "id": 1 },
+    { "name": "CONFIRMED", "title": "Confirmed", "id": 2 },
+    { "name": "EXPIRED", "title": "Expired", "id": 3 },
+    { "name": "INACTIVE", "title": "Inactive", "id": 4 }
+]
+
+
 /*
 * Risk Management Department
 Legal Compliance and Compliance Control Division

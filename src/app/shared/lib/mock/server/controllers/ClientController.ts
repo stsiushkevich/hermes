@@ -2,11 +2,11 @@ import Controller from './Controller'
 
 import Response from '@shared/lib/mock/server/lib/utils/ResponseUtils'
 
-import dao from '../dao/EmployeeDao'
+import dao from '../dao/ClientDao'
 
-class EmployeeController extends Controller {
+class ClientController extends Controller {
     getPath() {
-        return '/*/employees'
+        return '/clients'
     }
 
     getHandlers() {
@@ -21,4 +21,4 @@ class EmployeeController extends Controller {
     }
 }
 
-export default new EmployeeController()
+export default new ClientController()

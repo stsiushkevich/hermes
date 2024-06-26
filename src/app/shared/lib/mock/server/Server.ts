@@ -6,7 +6,7 @@ import ServerResponse from "@shared/types/ServerResponse";
 import ResponseUtils from "@shared/lib/mock/server/lib/utils/ResponseUtils";
 
 import loginController from '../server/controllers/LoginController'
-import employeeController from '../server/controllers/EmployeeController'
+import clientController from './controllers/ClientController'
 
 import { ERRORS } from './lib/Constants'
 
@@ -14,7 +14,7 @@ const RESPONSE_DELAY = 1000
 
 const REQUEST_MAPPING = {
     [loginController.getPath()]: loginController,
-    [employeeController.getPath()]: employeeController,
+    [clientController.getPath()]: clientController,
 }
 
 class Server {

@@ -1,0 +1,20 @@
+.loginForm {
+    &__title {
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    &__field {
+        margin-bottom: 40px;
+
+        &Input {
+            width: 100%
+        }
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
