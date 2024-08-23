@@ -31,7 +31,7 @@ export default function Client() {
     const department = getRandomArrayElement(Department)
     const gender = getRandomArrayElement(Gender)
     const status = getRandomArrayElement(EmployeeStatus)
-    const ssn = String(getRandomInt(111111, 999999))
+    const ssn = String(getRandomInt(111111111, 999999999))
 
     const birthDate = new Date(
         getRandomInt(1950, 2010),

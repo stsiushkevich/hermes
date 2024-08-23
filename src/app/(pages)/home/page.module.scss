@@ -2,4 +2,20 @@
     &__body {
 
     }
+
+    &__backImg {
+        &Container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            background: linear-gradient(180deg, rgb(13 71 161) 0%, rgb(17 82 168) 37%, rgb(49 167 223) 100%);
+        }
+    }
+
+    &__welcomeText {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px 0;
+    }
 }

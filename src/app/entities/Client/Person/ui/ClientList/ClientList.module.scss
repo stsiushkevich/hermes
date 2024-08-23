@@ -1,3 +1,9 @@
 .clientList {
     padding-bottom: 10px;
+
+    &__fullName {
+        color: #0a69fd;
+        font-weight: 700;
+        text-decoration: none;
+    }
 }

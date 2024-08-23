@@ -6,6 +6,8 @@ import React, {
     useCallback
 } from 'react'
 
+import Link from 'next/link'
+
 import {
     useRouter,
     usePathname,
@@ -49,8 +51,8 @@ const STATUS_SEVERITIES: Record<string, TagProps['severity']> = {
  * server components of data lists: https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
  * */
 const ClientList: FC<TProps> = ({ data, pagination }) => {
-    const { replace } = useRouter()
     const pathname = usePathname()
+    const { replace } = useRouter()
     const searchParams = useSearchParams()
 
     const onChangePage = useCallback((e: PaginatorPageChangeEvent) => {
@@ -67,7 +69,18 @@ const ClientList: FC<TProps> = ({ data, pagination }) => {
     return (
         <div className={styles.clientList}>
             <DataTable value={data}>
-                <Column field="fullName" header="Name"/>
+                <Column
+                    field="fullName"
+                    header="Name"
+                    body={data => (
+                        <Link
+                            href={`/clients/${data.id}/dashboard`}
+                            className={styles.clientList__fullName}
+                        >
+                            {data.fullName}
+                        </Link>
+                    )}
+                />
                 <Column field="phone" header="Phone"/>
                 <Column field="ssn" header="SSN"/>
                 <Column field="birthDate" header="Birth Date"/>

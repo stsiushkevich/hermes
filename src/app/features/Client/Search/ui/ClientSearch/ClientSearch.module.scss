@@ -1,0 +1,28 @@
+.clientSearch {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+
+    &__row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+
+    &__iconField {
+        width: 50%;
+        margin-right: 20px;
+    }
+
+    &__textInput {
+        width: 100%;
+        min-width: 200px;
+    }
+
+    &__pendingIndicator {
+        position: relative;
+        padding: 1px 0;
+    }
+}

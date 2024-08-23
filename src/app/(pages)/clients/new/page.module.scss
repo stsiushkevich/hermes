@@ -1,0 +1,14 @@
+.newClient {
+    &__header {
+        padding: 20px 40px;
+    }
+
+    &__title {
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    &__body {
+        padding: 0 40px 20px;
+    }
+}

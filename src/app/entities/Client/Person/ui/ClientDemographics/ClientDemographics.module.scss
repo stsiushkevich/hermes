@@ -1,0 +1,17 @@
+.clientDemographics {
+    &__field {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+
+        &Name {
+            min-width: 150px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        &Value {
+
+        }
+    }
+}

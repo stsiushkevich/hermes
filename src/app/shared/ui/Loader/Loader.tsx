@@ -14,24 +14,26 @@ type Props = {
 }
 
 const Loader: FC<Props> = ({ size, isInline, isCentered, hasBackdrop }) => (
-    <div
-        className={cn(
-            styles.loader,
-            isInline && styles.inline,
-            isCentered && styles.loader_centered,
-            hasBackdrop && styles.loader_has_backdrop
-        )}
-    >
-        <img
-            alt="loading..."
-            src={loader.src}
-            style={{ height: size }}
-            className={styles.loader__icon}
-        />
+    <>
+        <div
+            className={cn(
+                styles.loader,
+                isInline && styles.inline,
+                isCentered && styles.loader_centered,
+                hasBackdrop && styles.loader_has_backdrop
+            )}
+        >
+            <img
+                alt="loading..."
+                src={loader.src}
+                style={{ height: size }}
+                className={styles.loader__icon}
+            />
+        </div>
         {hasBackdrop && (
             <div className={styles.loader__backdrop}/>
         )}
-    </div>
+    </>
 )
 
 export default Loader

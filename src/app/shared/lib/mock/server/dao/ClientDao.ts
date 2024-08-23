@@ -6,6 +6,8 @@ import {
     Client
 } from '../types/entities'
 
+import { ClientStatus } from '../../db/DB'
+
 import { getRandomInt, getRandomArray } from '@shared/lib/mock/server/lib/utils/Utils'
 
 import ClientFactory from '../factories/Client'
@@ -36,6 +38,10 @@ class ClientDao {
 
     findById(id) {
         return Promise.resolve(clients.find(o => o.id === id))
+    }
+
+    findStatuses() {
+        return Promise.resolve(ClientStatus)
     }
 
     count() {

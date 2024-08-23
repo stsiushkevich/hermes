@@ -46,14 +46,24 @@ const LoginForm: FC<Props> = async ({ error }) => {
         <form className={cn("container", styles.loginForm)} action={submit}>
             <div className={styles.loginForm__field}>
                 <FloatLabel>
-                    <InputText required id={FieldNames.USER_NAME} name={FieldNames.USER_NAME} className={styles.loginForm__fieldInput}/>
+                    <InputText
+                        required
+                        id={FieldNames.USER_NAME}
+                        name={FieldNames.USER_NAME}
+                        className={styles.loginForm__fieldInput}
+                    />
                     <label htmlFor={FieldNames.USER_NAME}>Login</label>
                 </FloatLabel>
             </div>
 
             <div className={styles.loginForm__field}>
                 <FloatLabel>
-                    <InputText required id={FieldNames.PASSWORD} name={FieldNames.PASSWORD} className={styles.loginForm__fieldInput}/>
+                    <InputText
+                        required
+                        id={FieldNames.PASSWORD}
+                        name={FieldNames.PASSWORD}
+                        className={styles.loginForm__fieldInput}
+                    />
                     <label htmlFor={FieldNames.PASSWORD}>Password</label>
                 </FloatLabel>
             </div>

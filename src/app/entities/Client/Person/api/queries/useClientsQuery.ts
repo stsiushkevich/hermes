@@ -20,7 +20,7 @@ function fetch(params: QueryParams) {
 
 export default function useClientsQuery(params?: QueryParams, options?: QueryOptions) {
     return useQuery<Client[], IError>({
-        queryKey: ['Employees', params],
+        queryKey: ['Clients', params],
         queryFn: () => fetch(params),
         ...options,
     });

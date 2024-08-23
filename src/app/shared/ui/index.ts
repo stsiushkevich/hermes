@@ -1,3 +1,5 @@
 export { default as Loader } from './Loader/Loader'
+export { default as Dropdown } from './Dropdown/Dropdown'
+export { default as InputMask } from './InputMask/InputMask'
 export { default as DataLoadable } from './DataLoadable/DataLoadable'
 export { default as NavigationBar } from './NavigationBar/NavigationBar'

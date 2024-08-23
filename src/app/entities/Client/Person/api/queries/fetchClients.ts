@@ -13,6 +13,6 @@ export default async function fetchClients(params?: QueryParams): Promise<Page<C
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(clientDao.find(params))
-        }, 500)
+        }, 3000)
     })
 }
