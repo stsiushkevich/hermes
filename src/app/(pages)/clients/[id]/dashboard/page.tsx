@@ -1,11 +1,11 @@
 import { FC, Suspense } from 'react'
 
+import { Loader } from '@shared/ui'
+
 import {
     ClientToolbar,
     ClientDemographics
-} from '@widgets/Client/Person/ui'
-
-import { Loader } from '@shared/ui'
+} from '@widgets/Client/Person'
 
 import styles from './page.module.scss'
 

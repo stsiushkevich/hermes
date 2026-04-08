@@ -17,12 +17,9 @@ import {
 } from '@shared/ui/forms'
 
 import {
-    Client
-} from '@entities/Client/Person/model/types'
-
-import {
+    Client,
     fetchClient
-} from '@entities/Client/Person/api/queries'
+} from '@entities/Client/Person'
 
 import styles from './ClientSearch.module.scss'
 

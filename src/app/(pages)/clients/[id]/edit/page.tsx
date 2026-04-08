@@ -1,8 +1,8 @@
 import { FC, Suspense } from 'react'
 
-import { ClientForm } from '@features/Client/Person/ui'
-
 import { Loader } from '@shared/ui'
+
+import { ClientForm } from '@features/Client/Person'
 
 import styles from './page.module.scss'
 
@@ -28,7 +28,7 @@ const ClientEdit: FC<Props> = ({ params, searchParams }) => {
             </div>
 
             <div className={styles.clientEdit__body}>
-                {/*Streaming a Server Component "@features/Client/Person/ui/ClientForm" with Suspense*/}
+                {/*Streaming with Suspense*/}
                 <Suspense fallback={(<Loader/>)}>
                     <ClientForm clientId={clientId} error={error}/>
                 </Suspense>

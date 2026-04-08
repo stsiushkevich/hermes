@@ -1,8 +1,8 @@
 import { FC, Suspense } from 'react'
 
-import { Clients as ClientList } from '@widgets/Client/Person/ui'
-
 import { Loader } from '@shared/ui'
+
+import { Clients as ClientList } from '@widgets/Client/Person'
 
 import styles from './page.module.scss'
 
@@ -33,7 +33,7 @@ const Clients: FC<Props> = ({ searchParams }) => {
             </div>
 
             <div className={styles.clients__body}>
-                {/*Streaming a Server Component "@widgets/Client/Person/ui/Clients" with Suspense*/}
+                {/*Streaming with Suspense*/}
                 <Suspense key={page} fallback={(<Loader/>)}>
                     <ClientList
                         page={page}

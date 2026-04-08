@@ -24,11 +24,11 @@ import {
     fetchClient,
     submitClient,
     fetchClientStatuses
-} from '@entities/Client/Person/api/queries'
+} from '@entities/Client/Person'
 
 import {
     fetchGenders
-} from '@entities/Directory/api/queries'
+} from '@entities/Directory'
 
 import styles from './ClientForm.module.scss'
 

@@ -13,7 +13,7 @@ import {
 
 import { Toast } from 'primereact/toast'
 
-import { ClientToolbar as Toolbar } from '@entities/Client/Person/ui'
+import { ClientToolbar as Toolbar } from '@entities/Client/Person'
 
 import styles from './ClientToolbar.module.scss'
 
