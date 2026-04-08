@@ -1,4 +1,4 @@
-type Response<Data> = {
+type Response<Data = null> = {
     statusCode: number
     headers?: Record<string, string>
     body: {

@@ -1,8 +1,8 @@
 import { FC } from 'react'
 
-import hermesImage from '@/assets/images/hermes.png'
+import { LoginForm2 } from '@features/Login'
 
-import { LoginForm2 } from '@features/Login/ui'
+import hermesImage from '@/assets/images/hermes.png'
 
 import styles from './page.module.scss'
 

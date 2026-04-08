@@ -12,9 +12,9 @@ export type BaseOptions = {
 };
 
 export default interface IBaseService<E = unknown> {
-  find: (options: BaseOptions) => Promise<E[] | Page<E[]> | IError>
+  find: (options: BaseOptions) => Promise<E[] | Page<E[]>>
   findOne: (options: BaseOptions) => Promise<E | IError>
-  post: <R>(entity: E | FormData, options: BaseOptions) => Promise<R | IError>
-  put: <R>(entity: E | FormData, options: BaseOptions) => Promise<R | IError>
-  delete: <R>(options: BaseOptions) => Promise<R | IError>
+  post: <R>(entity: E | FormData, options: BaseOptions) => Promise<R>
+  put: <R>(entity: E | FormData, options: BaseOptions) => Promise<R>
+  delete: <R>(options: BaseOptions) => Promise<R>
 }

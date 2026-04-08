@@ -11,11 +11,11 @@ import { Client } from '../../model/types'
 const BASE_PATH = '/clients'
 
 export class ClientService extends BaseService<Client> {
-    find(params: QueryParams): Promise<Client[] | Page<Client[]> | IError> {
+    find(params: QueryParams): Promise<Client[] | Page<Client[]>> {
         return super.find({ path: BASE_PATH, params })
     }
 
-    findOne({ id }: { id: number }): Promise<IError | Client> {
+    findOne({ id }: { id: number }): Promise<Client> {
         return super.findOne({ path: `${BASE_PATH}/${id}` })
     }
 }

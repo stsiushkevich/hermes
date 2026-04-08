@@ -1,10 +1,9 @@
 import { FC } from 'react'
 
-import { ClientList } from '@entities/Client/Person/ui'
-
 import {
+    ClientList,
     fetchClients
-} from '@entities/Client/Person/api/queries'
+} from '@entities/Client/Person'
 
 import styles from './Clients.module.scss'
 

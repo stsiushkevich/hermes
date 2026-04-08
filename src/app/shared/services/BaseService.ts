@@ -59,22 +59,17 @@ function onSuccess<D>(o: Response<D>): Promise<D> {
     throw new ServerError(code, message)
 }
 
-function onFailure<D>(e: Response<D> | IError): Promise<D> {
-    const error = (e as IError)
-    const response = (e as Response<D>)
-
-    if (error.code) throw e
-
-    const { code, message } = response.body?.error
+function onFailure<D>(o: Response): Promise<D> {
+    const { code, message } = o.body?.error
     throw new ServerError(code, message)
 }
 
 export default class BaseService<E = unknown> implements IBaseService<E> {
-    request<D>(request: Request): Promise<D | IError> {
-      return server.service(request) as Promise<D | IError>
+    request<D>(request: Request): Promise<D> {
+      return server.service(request) as Promise<D>
     }
 
-    find(options: BaseOptions): Promise<E[] | Page<E[]> | IError> {
+    find(options: BaseOptions): Promise<E[] | Page<E[]>> {
         const {
             url,
             path,
@@ -85,10 +80,10 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         return this
             .request({ url: url ?? getUrl(path, params), method: 'GET', params })
             .then((o: Response<E[] | Page<E[]>>) => onSuccess(o))
-            .catch((e: Response<IError>) => onFailure(e))
+            .catch((e: Response) => onFailure(e))
     }
 
-    findOne(options: BaseOptions): Promise<E | IError> {
+    findOne(options: BaseOptions): Promise<E> {
         const {
             url,
             path,
@@ -99,10 +94,10 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         return this
             .request({ url: url ?? getUrl(path, params), method: 'GET', params })
             .then((o: Response<E>) => onSuccess(o))
-            .catch((e: Response<IError>) => onFailure(e))
+            .catch((e: Response) => onFailure(e))
     }
 
-    post<R>(entity: E | FormData, options: BaseOptions): Promise<R | IError> {
+    post<R>(entity: E | FormData, options: BaseOptions): Promise<R> {
         const {
             url,
             path,
@@ -112,10 +107,10 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         return this
             .request({ url: url ?? path, method: 'POST', body: entity })
             .then((o: Response<R>) => onSuccess(o))
-            .catch((e: Response<IError>) => onFailure(e))
+            .catch((e: Response) => onFailure(e))
     }
 
-    put<R>(entity: E | FormData, options: BaseOptions): Promise<R | IError> {
+    put<R>(entity: E | FormData, options: BaseOptions): Promise<R> {
         const {
             url,
             path,
@@ -126,10 +121,10 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         return this
             .request({ url: url ?? getUrl(path, params), method: 'PUT', body: entity })
             .then((o: Response<R>) => onSuccess(o))
-            .catch((e: Response<IError>) => onFailure(e))
+            .catch((e: Response) => onFailure(e))
     }
 
-    delete<R>(options: BaseOptions): Promise<R | IError> {
+    delete<R>(options: BaseOptions): Promise<R> {
         const {
             url,
             path,
@@ -140,6 +135,6 @@ export default class BaseService<E = unknown> implements IBaseService<E> {
         return this
             .request({ url: url ?? getUrl(path, params), method: 'DELETE', params })
             .then((o: Response<R>) => onSuccess(o))
-            .catch((e: Response<IError>) => onFailure(e))
+            .catch((e: Response) => onFailure(e))
     }
 }

@@ -1,10 +1,9 @@
 import { FC } from 'react'
 
-import { ClientDemographics as Demographics } from '@entities/Client/Person/ui'
-
-import {
-    fetchClient
-} from '@entities/Client/Person/api/queries'
+import { 
+    fetchClient,
+    ClientDemographics as Demographics 
+} from '@entities/Client/Person'
 
 import styles from './ClientDemographics.module.scss'
 

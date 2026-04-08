@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { ClientSearch } from '@features/Client/Search/ui'
+import { ClientSearch } from '@features/Client/Search'
 
 import backImg from '@/assets/images/home-background.png'
 
